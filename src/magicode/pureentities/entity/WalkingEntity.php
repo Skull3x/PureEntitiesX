@@ -64,8 +64,7 @@ abstract class WalkingEntity extends BaseEntity{
             $x = mt_rand(20, 100);
             $z = mt_rand(20, 100);
             $this->moveTime = mt_rand(300, 1200);
-            $this->baseTarget = $this->add(mt_rand(0, 1) ? $x : -$x, 0, mt_rand(0, 1) ? $z : -$z);
-        }
+            $this->baseTarget = $this->add(mt_rand(0, 1) ? $x : -$x, 0, mt_rand(0, 1) ? $z : -$z);        }
     }
 
     /**
@@ -79,8 +78,7 @@ abstract class WalkingEntity extends BaseEntity{
             return false;
         }
 
-        if($this->motionY == $this->gravity * 2){
-            return $this->level->getBlock(new Vector3(Math::floorFloat($this->x), (int) $this->y, Math::floorFloat($this->z))) instanceof Liquid;
+        if($this->motionY == $this->gravity * 2){            return $this->level->getBlock(new Vector3(Math::floorFloat($this->x), (int) $this->y, Math::floorFloat($this->z))) instanceof Liquid;
         }else if($this->level->getBlock(new Vector3(Math::floorFloat($this->x), (int) ($this->y + 0.8), Math::floorFloat($this->z))) instanceof Liquid){
             $this->motionY = $this->gravity * 2;
             return true;
@@ -159,7 +157,7 @@ abstract class WalkingEntity extends BaseEntity{
 
         if(!$isJump){
             if($this->onGround){
-                $block = $this->level->getBlock($this->add($dx, 0, $dz));
+                $block = $this->level->getBlock($this->add($dx, 0.2, $dz));
                 if($block->isSolid()) {
                     $this->motionY = 1;
                 } else {
@@ -175,3 +173,4 @@ abstract class WalkingEntity extends BaseEntity{
         return $this->baseTarget;
     }
 }
+
