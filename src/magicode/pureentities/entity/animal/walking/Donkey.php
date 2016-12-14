@@ -3,38 +3,38 @@
 namespace magicode\pureentities\entity\animal\walking;
 
 use magicode\pureentities\entity\animal\WalkingAnimal;
-use pocketmine\entity\Colorable;
+use pocketmine\entity\Rideable;
 use pocketmine\item\Item;
 use pocketmine\Player;
 use pocketmine\event\entity\EntityDamageByEntityEvent;
 use pocketmine\entity\Creature;
 
-class Sheep extends WalkingAnimal implements Colorable{
-    const NETWORK_ID = 13;
+class Donkey extends WalkingAnimal implements Rideable{
+    const NETWORK_ID = 24;
 
-    public $width = 1.45;
-    public $height = 1.12;
+    public $width = 1.4;
+    public $height = 1.6;
 
     public function getName(){
-        return "Sheep";
+        return "Donkey";
     }
 
     public function initEntity(){
         parent::initEntity();
 
-        $this->setMaxHealth(8);
+        $this->setMaxHealth(20);
     }
 
     public function targetOption(Creature $creature, float $distance) : bool{
         if($creature instanceof Player){
-            return $creature->spawned && $creature->isAlive() && !$creature->closed && $creature->getInventory()->getItemInHand()->getId() == Item::SEEDS && $distance <= 49;
+            return $creature->spawned && $creature->isAlive() && !$creature->closed && $creature->getInventory()->getItemInHand()->getId() == Item::WHEAT && $distance <= 49;
         }
         return false;
-    }
+}
 
     public function getDrops(){
         if($this->lastDamageCause instanceof EntityDamageByEntityEvent){
-            return [Item::get(Item::WHITE_WOOL, 1)];
+            return [Item::get(Item::LEATHER, 0, 2)];
         }
         return [];
     }
