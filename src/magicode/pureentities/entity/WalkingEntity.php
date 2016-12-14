@@ -160,7 +160,7 @@ abstract class WalkingEntity extends BaseEntity{
         if(!$isJump){
             if($this->onGround){
                 $block = $this->level->getBlock($this->add($dx, 0, $dz));
-                if($block instanceof Solid) {
+                if($block->isSolid()) {
                     $this->motionY = 1;
                 } else {
                     $this->motionY = 0;
