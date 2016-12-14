@@ -78,7 +78,8 @@ abstract class WalkingEntity extends BaseEntity{
             return false;
         }
 
-        if($this->motionY == $this->gravity * 2){            return $this->level->getBlock(new Vector3(Math::floorFloat($this->x), (int) $this->y, Math::floorFloat($this->z))) instanceof Liquid;
+        if($this->motionY == $this->gravity * 2){
+            return $this->level->getBlock(new Vector3(Math::floorFloat($this->x), (int) $this->y, Math::floorFloat($this->z))) instanceof Liquid;
         }else if($this->level->getBlock(new Vector3(Math::floorFloat($this->x), (int) ($this->y + 0.8), Math::floorFloat($this->z))) instanceof Liquid){
             $this->motionY = $this->gravity * 2;
             return true;
@@ -89,16 +90,10 @@ abstract class WalkingEntity extends BaseEntity{
         }
 
         $block = $this->level->getBlock($this->add($dx, 0, $dz));
-        
-        if($block instanceof Fence || $block instanceof FenceGate){
-            $this->motionY = $this->gravity;
+        if($block instanceof Slab || $block instanceof Stair){
+            $this->motionY = 0.5;
             return true;
-        } elseif($this->motionY <= $this->gravity * 4) {
-            $this->motionY = $this->gravity * 4;
-            return true;
-        } else {
-            return false;
-        } 
+        }
         return false;
     }
 
@@ -158,7 +153,7 @@ abstract class WalkingEntity extends BaseEntity{
             if($this->onGround){
                 $block = $this->level->getBlock($this->add($dx, 0.2, $dz));
                 if($block->isSolid()) {
-                    $this->motionY = 4;
+                    $this->motionY = 1;
                     var_dump($this->motionY);
                 } else {
                     $this->motionY = 0;
