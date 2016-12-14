@@ -97,8 +97,7 @@ abstract class WalkingEntity extends BaseEntity{
             $this->motionY = $this->gravity * 4;
             return true;
         } else {
-            $this->motionY += $this->gravity * 0.25;
-            return true;
+            return false;
         } 
         return false;
     }
