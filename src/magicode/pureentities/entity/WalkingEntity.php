@@ -78,9 +78,9 @@ abstract class WalkingEntity extends BaseEntity{
             return false;
         }
 
-        if($this->motionY == $this->gravity * 2){
+        if($this->motionY == $this->gravity * 2) {
             return $this->level->getBlock(new Vector3(Math::floorFloat($this->x), (int) $this->y, Math::floorFloat($this->z))) instanceof Liquid;
-        }else if($this->level->getBlock(new Vector3(Math::floorFloat($this->x), (int) ($this->y + 0.8), Math::floorFloat($this->z))) instanceof Liquid){
+        } elseif($this->level->getBlock(new Vector3(Math::floorFloat($this->x), (int) ($this->y + 0.8), Math::floorFloat($this->z))) instanceof Liquid){
             $this->motionY = $this->gravity * 2;
             return true;
         }
@@ -156,6 +156,7 @@ abstract class WalkingEntity extends BaseEntity{
             if($this->onGround){
                 $block = $this->level->getBlock($this->add($dx, 0.2, $dz));
                 if($block->isSolid()) {
+                    $this->checkJump($dx, $dz);
                     $this->motionY = 1;
                     var_dump($this->motionY);
                 } else {
