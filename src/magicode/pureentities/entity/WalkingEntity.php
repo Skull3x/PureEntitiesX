@@ -91,11 +91,11 @@ abstract class WalkingEntity extends BaseEntity{
 
         $block = $this->level->getBlock($this->add($dx, 0, $dz));
         if($block instanceof Slab || $block instanceof Stair){
-            $this->motionY = 0.5;
+            $this->motionY = 2.5;
             var_dump($block instanceof Slab);
             return true;
         } elseif($block->isSolid()) {
-            $this->motionY = 1;
+            $this->motionY = 3;
             var_dump($block->isSolid());
             return true;
         }
